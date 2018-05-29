@@ -20,7 +20,9 @@ RUN yum update -y
 RUN yum install httpd mod_ssl php php-mysql -y
 
 # Add configuration file
-ADD wp/wordpress/ /var/www/html/
+#ADD wp/wordpress/ /var/www/html/
+COPY wp/latest.tar.gz /latest.tar.gz
+RUN tar -xzvf latest.tar.gz --directory=/var/www/html --strip 1
 RUN chown -R apache:apache /var/www/html/*
 EXPOSE 80
 EXPOSE 443
